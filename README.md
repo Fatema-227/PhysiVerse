@@ -4,24 +4,22 @@
 
 ### By: Fatima Ali
 
-#### [Fatima Ali GitHub](https://github.com/Fatema-227)
-
 ---
 
-### **_Description_**
+### Description:
 
 #### PhysiVerse is an interactive platform for virtual physics laboratories. It allows students to explore physics experiments online through pre-added simulations,videos and instructional content.The platform is designed for learning, observation, and enhancing understanding of physics concepts.
 
 ####
 ---
 
-### **_Project Link_**
+###
 
-#### [click here](https://github.com/Fatema-227/PhysiVerse)
+#### [Project Link](https://github.com/Fatema-227/PhysiVerse)
 
 ---
 
-### **_Trello:_**
+### Trello:
 
 ####
 
@@ -29,7 +27,7 @@ Follow the project phases in [trello](https://trello.com/b/OapQ1zhC/physiverse)
 
 ---
 
-### **_Technologies used:_**
+### Technologies used:
 
 ####
 
@@ -46,7 +44,7 @@ Database(SQL):
 
 ---
 
-### **_ERD:_**
+### ERD:
 
 ####
 
@@ -54,7 +52,7 @@ Database(SQL):
 
 ---
 
-### **_WireFrames:_**
+### WireFrames:
 
 ![](./assets/Welcome%20Page.png)
 ![](./assets/All%20labs.png)
@@ -65,7 +63,7 @@ Database(SQL):
 
 ---
 
-### **_User Stories :_**
+### User Stories :
 
 - As a user, I want to view all labs in the system.
 - As a user, I want to view experiments inside each lab.
@@ -77,7 +75,7 @@ Database(SQL):
 
 ---
 
-### **_Future Enhancements:_**
+### Future Enhancements:
 
 - As a user, I want to edit or delete my comments.
 - As an admin, I want to delete or update experiments.
@@ -90,5 +88,5 @@ Database(SQL):
 
 ---
 
-### **_Credits:_**
+### Credits:
 ###
