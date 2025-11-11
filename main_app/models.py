@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Lab(models.Model):
@@ -11,6 +12,10 @@ class Lab(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('labs_detail', kwargs={'pk': self.id})
+
+
 class Experiment(models.Model):
     title=models.CharField(max_length=100)
     description=models.TextField(max_length=100)
@@ -21,5 +26,21 @@ class Experiment(models.Model):
     lab=models.ForeignKey(Lab,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.title
 
+    def get_absolute_url(self):
+        return reverse('experiments_detail', kwargs={'pk': self.id})
+
+
+class Comment(models.Model):
+    content=models.TextField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    experiment=models.ForeignKey(Experiment,on_delete=models.CASCADE)
+    parent=models.ForeignKey('self',on_delete=models.CASCADE,null=True,blank=True)
+
+    def __str__(self):
+        return f"Comment by {self.user}"
+
+    def get_absolute_url(self):
+        return reverse('comments_detail', kwargs={'pk': self.id})
