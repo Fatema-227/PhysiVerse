@@ -13,7 +13,11 @@ def about(request):
 
 def labs_list(request):
     labs=Lab.objects.all()
-    return render(request,'labs_list.html', {'labs':labs})
+    return render(request,'main_app/labs_list.html', {'labs':labs})
+
+def lab_detail(request,lab_id):
+    lab=Lab.
+    return render(request,'main_app/lab_detail.html')
 
 def signup(request):
     error_message=''

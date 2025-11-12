@@ -1,0 +1,11 @@
+{% extends 'main_app/base.html' %}
+{% block title %}
+{{ lab.name }}
+{% endblock %}
+{% block content %}
+{% for exp in experiments %}
+<li>
+  <a href="{% url 'experiment_detail' exp.id %}">{{ exp.title }}</a>
+</li>
+{% endfor %}
+{% endblock %}
