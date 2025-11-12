@@ -1,34 +1,41 @@
 {% extends 'main_app/base.html' %}
 {% load static %}
+
 {% block title %}
 {{ experiment.title }}
 {% endblock %}
 
 {% block content %}
 <div class="experiment-detail">
+
   <h2>{{ experiment.title }}</h2>
   <p>{{ experiment.description }}</p>
 
   {% if experiment.Simulation_Data %}
-  <div class="simulation-container" style="margin-top: 20px;">
+  <div class="simulation-container">
     <h3>Interactive Simulation</h3>
-    {{ experiment.Simulation_Data|safe }}
+    <div class="simulation-frame">
+      {{ experiment.Simulation_Data|safe }}
+    </div>
   </div>
   {% endif %}
-</div>
 
   {% if experiment.video %}
-  <div class="video-container" style="margin-top: 20px;">
-    <h3>Video for experiment</h3>
-    <video width="100%" controls>
+  <div class="video-container">
+    <h3>Video for Experiment</h3>
+    <video controls>
       <source src="{% static experiment.video|cut:'main_app/static/' %}" type="video/mp4">
+      Your browser does not support the video tag.
     </video>
   </div>
   {% endif %}
 
   {% if experiment.image %}
-      <h5>image for experiment</h5>
-  <img src="{% static experiment.image|cut:'main_app/static/' %}" alt="{{ experiment.title }}" />
+  <div class="image-container">
+    <h3>Image for Experiment</h3>
+    <img src="{% static experiment.image|cut:'main_app/static/' %}" alt="{{ experiment.title }}">
+  </div>
   {% endif %}
 
+</div>
 {% endblock %}
