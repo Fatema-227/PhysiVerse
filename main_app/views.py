@@ -16,8 +16,9 @@ def labs_list(request):
     return render(request,'main_app/labs_list.html', {'labs':labs})
 
 def lab_detail(request,lab_id):
-    lab=Lab.
-    return render(request,'main_app/lab_detail.html')
+    lab=Lab.objects.get(id=lab_id)
+    experiments=Experiment.objects.filter(lab=lab)
+    return render(request,'main_app/lab_detail.html',{'lab':lab , 'experiments':experiments})
 
 def signup(request):
     error_message=''

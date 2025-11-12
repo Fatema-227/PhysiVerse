@@ -3,9 +3,16 @@
 {{ lab.name }}
 {% endblock %}
 {% block content %}
-{% for exp in experiments %}
-<li>
-  <a href="{% url 'experiment_detail' exp.id %}">{{ exp.title }}</a>
-</li>
-{% endfor %}
+<h2>{{ lab.name }}</h2>
+<p>{{ lab.description }}</p>
+<h4>Experiments:</h4>
+<ul>
+  {% for exp in experiments %}
+  <li>
+    <a href="{% url 'experiment_detail' exp.id %}">
+      {{ exp.title }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
 {% endblock %}

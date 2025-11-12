@@ -3,10 +3,17 @@
 <h1>All Labs</h1>
 {% for lab in labs %}
 <div class="lab-container">
-  <h3>{{ lab.name }}</h3>
   <div class="lab-card">
-  <p>{{lab.description}}</p>
-</div>
+    <h3>
+      <a href="{% url 'lab_detail' lab.id %}">
+        {{ lab.name }}
+      </a>
+    </h3>
+    <p>{{ lab.description }}</p>
+    <a class="btn" href="{% url 'lab_detail' lab.id %}">
+      Show All Experiments
+    </a>
+  </div>
 </div>
 {% endfor %}
 {% endblock %}
