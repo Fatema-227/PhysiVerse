@@ -21,7 +21,7 @@
   {% endif %}
 
   {% if experiment.video %}
-  <div class="video-container">
+  <div>
     <h3>Experiment Video</h3>
     <video controls>
       <source src="{% static experiment.video|cut:'main_app/static/' %}" type="video/mp4">

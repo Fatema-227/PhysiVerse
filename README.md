@@ -89,4 +89,6 @@ Database(SQL):
 ---
 
 ### Credits:
-###
+- [User Profile](https://dev.to/earthcomfy/django-user-profile-3hik)
+- [Created-at](https://www.geeksforgeeks.org/python/how-to-add-created-at-and-updated-at-fields-to-all-django-models-using-timestampedmodel/)
+- [Comment](https://stackoverflow.com/questions/47415600/django-add-comment-model-for-comment)
