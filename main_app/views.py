@@ -20,6 +20,10 @@ def lab_detail(request,lab_id):
     experiments=Experiment.objects.filter(lab=lab)
     return render(request,'main_app/lab_detail.html',{'lab':lab , 'experiments':experiments})
 
+def experiment_detail(request,exp_id):
+    experiment=Experiment.objects.get(id=exp_id)
+    return render(request,'main_app/experiment_detail.html',{'experiment':experiment})
+
 def signup(request):
     error_message=''
     if request.method=='POST':

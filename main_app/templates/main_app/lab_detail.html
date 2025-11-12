@@ -1,18 +1,13 @@
 {% extends 'main_app/base.html' %}
-{% block title %}
-{{ lab.name }}
-{% endblock %}
 {% block content %}
-<h2>{{ lab.name }}</h2>
-<p>{{ lab.description }}</p>
-<h4>Experiments:</h4>
-<ul>
+  <h1>{{ lab.name }}</h1>
+  <p>{{ lab.description }}</p>
+  <h2>Experiments in this Lab:</h2>
+  <ul>
   {% for exp in experiments %}
-  <li>
-    <a href="{% url 'experiment_detail' exp.id %}">
-      {{ exp.title }}
-    </a>
-  </li>
-  {% endfor %}
-</ul>
+    <li>
+      <a href="{% url 'experiment_detail' exp.id %}">{{ exp.title }}</a>
+    </li>
+  </ul>
+    {% endfor %}
 {% endblock %}
