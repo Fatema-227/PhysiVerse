@@ -22,7 +22,7 @@
 
   {% if experiment.video %}
   <div class="video-container">
-    <h3>Video for Experiment</h3>
+    <h3>Experiment Video</h3>
     <video controls>
       <source src="{% static experiment.video|cut:'main_app/static/' %}" type="video/mp4">
       Your browser does not support the video tag.
@@ -32,10 +32,9 @@
 
   {% if experiment.image %}
   <div class="image-container">
-    <h3>Image for Experiment</h3>
+    <h3>Experiment Image</h3>
     <img src="{% static experiment.image|cut:'main_app/static/' %}" alt="{{ experiment.title }}">
   </div>
   {% endif %}
-
 </div>
 {% endblock %}

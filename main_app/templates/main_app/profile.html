@@ -1,0 +1,28 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">{{ user.username }}'s Profile</h2>
+  {% if profile.avatar %}
+    <img src="{% static profile.avatar|cut:'main_app/static/image/profiles' %}">
+  {% endif %}
+
+  <p class="mt-3"><strong>Bio:</strong> {{ profile.bio}}</p>
+
+  <form method="POST" enctype="multipart/form-data" class="mt-4">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      {{ form.avatar }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_bio" class="form-label">Bio:</label>
+      {{ form.bio }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+  </form>
+</div>
+{% endblock %}
