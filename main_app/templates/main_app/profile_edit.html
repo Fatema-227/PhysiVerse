@@ -1,0 +1,19 @@
+{% extends 'main_app/base.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Edit Profile</h2>
+  <form method="POST" enctype="multipart/form-data" class="mt-4"></form>
+      {% csrf_token %}
+   <div class="mb-3">
+  <label for="id_avator" class="form-label">avatar:</label>
+  {{ form.avatar }}
+   </div>
+<div class="mb-3"></div>
+<label for="id_bio" class="form-label">Bio:</label>
+{{ form.bio }}
+</div>
+<button type="submit" class="btn btn-primary">Update Profile</button>
+<a href="{% url 'profile' user.username %}"class="btn btn-seconday">Back</a>
+  </form>
+</div>
+{% endblock %}
