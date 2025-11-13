@@ -15,7 +15,6 @@ class Profile(models.Model):
 class Lab(models.Model):
     name=models.CharField(max_length=100)
     description=models.TextField(max_length=900)
-    image=models.ImageField(upload_to='main_app/static/uploads/',default="")
     created_at=models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -30,7 +29,6 @@ class Experiment(models.Model):
     title=models.CharField(max_length=100)
     description=models.TextField(max_length=900)
     Simulation_Data=models.TextField()
-    image=models.ImageField(upload_to='main_app/static/image/',default="")
     video=models.FileField(upload_to='main_app/static/videos/',default="")
     created_at=models.DateTimeField(auto_now_add=True)
     lab=models.ForeignKey(Lab,on_delete=models.CASCADE)

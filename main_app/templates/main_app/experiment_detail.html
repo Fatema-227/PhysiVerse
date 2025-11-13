@@ -29,12 +29,4 @@
     </video>
   </div>
   {% endif %}
-
-  {% if experiment.image %}
-  <div class="image-container">
-    <h3>Experiment Image</h3>
-    <img src="{% static experiment.image|cut:'main_app/static/' %}" alt="{{ experiment.title }}">
-  </div>
-  {% endif %}
-</div>
 {% endblock %}

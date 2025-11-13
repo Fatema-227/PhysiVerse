@@ -1,9 +1,37 @@
 {% extends 'main_app/base.html' %}
 {% block content %}
-<h2>Sign Up</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Register</button>
-</form>
+<div class="container mt-5">
+  <h2 class="mb-4">Sign Up</h2>
+
+  <form method="POST" enctype="multipart/form-data" class="p-3 border rounded shadow-sm bg-light">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="id_username" class="form-label">Username:</label>
+      {{ form.username }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_password1" class="form-label">Password:</label>
+      {{ form.password1 }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_password2" class="form-label">Confirm Password:</label>
+      {{ form.password2 }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_avatar" class="form-label">Profile Picture:</label>
+      {{ form.avatar }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_bio" class="form-label">Bio:</label>
+      {{ form.bio }}
+    </div>
+
+    <button type="submit" class="btn btn-success w-100">Register</button>
+  </form>
+</div>
 {% endblock %}
