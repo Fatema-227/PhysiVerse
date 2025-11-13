@@ -13,17 +13,22 @@ def about(request):
     return render(request,'main_app/about.html')
 
 @login_required
-def profile(request):
+def profile_view(request):
+    profile = request.user.profile
+    return render(request, 'main_app/profile.html', {'profile': profile})
+
+@login_required
+def edit_profile(request):
     profile = request.user.profile
     if request.method == 'POST':
-        form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        form = UpdateProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('users-profile')
+            return redirect('profile')
     else:
-        form = UpdateProfileForm(instance=request.user.profile)
+        form = UpdateProfileForm(instance=profile)
 
-    return render(request, 'main_app/profile.html', {'form': form , 'profile': profile})
+    return render(request, 'main_app/profile_edit.html', {'form': form})
 
 @login_required
 def labs_list(request):
