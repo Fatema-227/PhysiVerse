@@ -46,10 +46,23 @@ class Comment(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     experiment=models.ForeignKey(Experiment,on_delete=models.CASCADE)
-    parent=models.ForeignKey('self',on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f"Comment by {self.user}"
 
     def get_absolute_url(self):
         return reverse('comments_detail', kwargs={'pk': self.id})
+
+class Discussion(models.Model):
+    body = models.TextField(max_length=250)
+    created_at = models.DateTimeField(auto_now_add=True)
+    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="main_app/static/uploads/", default="")
+
+class Reply(models.Model):
+    body = models.TextField(max_length=250)
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="main_app/static/uploads/", default="")
+    discussion = models.ForeignKey(Discussion, on_delete=models.CASCADE)

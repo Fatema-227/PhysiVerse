@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 * {
   margin: 0;
@@ -132,7 +132,7 @@ form input, form select, form textarea {
   font-size: 0.95rem;
 }
 
-form button {
+/* form button {
   width: 100%;
   background: #0078d7;
   color: #fff;
@@ -147,7 +147,7 @@ form button {
 
 form button:hover {
   background: #005fa3;
-}
+} */
 
 footer.page-footer {
   background: #f1f4f9;
@@ -178,7 +178,7 @@ h1, h2, h3 {
   }
 }
 
-nav form button {
+/* nav form button {
   background: #0078d7;
   color: white;
   border: none;
@@ -188,16 +188,17 @@ nav form button {
   cursor: pointer;
   transition: 0.3s;
   margin-left: 10px;
-}
+} */
 
-nav form button:hover {
+/* nav form button:hover {
   background: #005fa3;
-}
+} */
 
 nav form {
   display: inline;
 }
-.logout-btn {
+
+/* .logout-btn {
   background: #0078d7;
   color: white;
   border: none;
@@ -206,11 +207,11 @@ nav form {
   font-weight: 500;
   cursor: pointer;
   transition: 0.3s;
-}
+} */
 
-.logout-btn:hover {
+/* .logout-btn:hover {
   background: #005fa3;
-}
+} */
 
 
 .experiments-grid {
@@ -314,4 +315,10 @@ nav form {
   border: 1px solid #e0e6ef;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
- */
+
+button{
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -20,13 +20,35 @@
   </div>
   {% endif %}
 
+  <br>
   {% if experiment.video %}
   <div>
     <h3>Experiment Video</h3>
-    <video controls>
+    <video width="850" controls>
       <source src="{% static experiment.video|cut:'main_app/static/' %}" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
   {% endif %}
+
+<br>
+  <h3>Comments</h3>
+  <ul>
+    {% for comment in comments %}
+    <li>
+      <strong> {{ comment.user.username }} : </strong>
+      {{ comment.content  }}
+    </li>
+        {% endfor %}
+  </ul>
+
+  {% if user.is_authenticated and not user_commented %}
+  <form method="post" action="">
+    {% csrf_token %}
+    <textarea name="content" placeholder="Add a comment"></textarea>
+    <button type="submit">Post Comment</button>
+  </form>
+
+  {% endif %}
+</div>
 {% endblock %}

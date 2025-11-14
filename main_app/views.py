@@ -29,7 +29,7 @@ def edit_profile(request):
     else:
         form = UpdateProfileForm(instance=profile)
 
-    return render(request, 'main_app/profile_edit.html', {'form': form})
+    return render(request, 'main_app/profile_edit.html', {'form': form, 'profile':profile})
 
 @login_required
 def labs_list(request):
@@ -45,8 +45,17 @@ def lab_detail(request,lab_id):
 @login_required
 def experiment_detail(request,exp_id):
     experiment=Experiment.objects.get(id=exp_id)
-    comments = Comment.objects.filter(experiment=experiment, parent__isnull=True)
-    return render(request,'main_app/experiment_detail.html',{'experiment':experiment ,'comments': comments})
+    comments = Comment.objects.filter(experiment=experiment)
+    user_commented = comments.filter(user=request.user).exists()
+
+    if request.method=='POST' and request.user.is_authenticated:
+        content=request.POST.get('content')
+
+        if content:
+            Comment.objects.create(experiment=experiment,user=request.user, content=content)
+            return redirect('experiment_detail',exp_id=exp_id)
+
+    return render(request,'main_app/experiment_detail.html',{'experiment':experiment ,'comments': comments , 'user_commented': user_commented})
 
 
 def signup(request):
