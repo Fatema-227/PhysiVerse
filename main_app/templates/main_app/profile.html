@@ -2,7 +2,7 @@
 <div class="container mt-5">
   <h2 class="mb-4">{{ user.username }}'s Profile</h2>
   {% if profile.avatar %} {% load static %}
-  <img src="{% static profile.avatar|cut:'main_app/static/' %}" />
+  <img src="{% static profile.avatar|cut:'main_app/static/' %}" class="avatar"/>
   {% endif %}
 
   <p class="mt-3"><strong>Bio:</strong> {{ profile.bio}}</p>
