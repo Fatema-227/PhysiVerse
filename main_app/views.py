@@ -57,6 +57,23 @@ def experiment_detail(request,exp_id):
 
     return render(request,'main_app/experiment_detail.html',{'experiment':experiment ,'comments': comments , 'user_commented': user_commented})
 
+@login_required
+def edit_comment(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    if request.user == comment.user:
+        if request.method == 'POST':
+            comment.content = request.POST.get('content')
+            comment.save()
+    return redirect('experiment_detail', exp_id=comment.experiment.id)
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    experiment_id = comment.experiment.id
+    if request.user == comment.user:
+        comment.delete()
+    return redirect('experiment_detail', exp_id=experiment_id)
+
 
 @login_required
 def experiment_discussion(request, exp_id):
@@ -80,6 +97,44 @@ def experiment_discussion(request, exp_id):
     all_replies = Reply.objects.filter(discussion__experiment=experiment).order_by("created_at")
 
     return render(request, "main_app/discussion.html", {"experiment": experiment,"discussions": discussions,"all_replies": all_replies,})
+
+@login_required
+def edit_discussion(request, discussion_id):
+    discussion = Discussion.objects.get(id=discussion_id)
+    if request.user == discussion.user:
+        if request.method == 'POST':
+            discussion.body = request.POST.get('body')
+            if request.FILES.get('image'):
+                discussion.image = request.FILES.get('image')
+            discussion.save()
+    return redirect('experiment_discussion', exp_id=discussion.experiment.id)
+
+@login_required
+def delete_discussion(request, discussion_id):
+    discussion = Discussion.objects.get(id=discussion_id)
+    experiment_id = discussion.experiment.id
+    if request.user == discussion.user:
+        discussion.delete()
+    return redirect('experiment_discussion', exp_id=experiment_id)
+
+@login_required
+def edit_reply(request, reply_id):
+    reply = Reply.objects.get(id=reply_id)
+    if request.user == reply.user:
+        if request.method == 'POST':
+            reply.body = request.POST.get('body')
+            if request.FILES.get('image'):
+                reply.image = request.FILES.get('image')
+            reply.save()
+    return redirect('experiment_discussion', exp_id=reply.discussion.experiment.id)
+
+@login_required
+def delete_reply(request, reply_id):
+    reply = Reply.objects.get(id=reply_id)
+    experiment_id = reply.discussion.experiment.id
+    if request.user == reply.user:
+        reply.delete()
+    return redirect('experiment_discussion', exp_id=experiment_id)
 
 
 def signup(request):
