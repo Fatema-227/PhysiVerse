@@ -4,7 +4,7 @@ from .forms import CustomSignupForm
 from .forms import UpdateProfileForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from .models import Profile,Lab,Experiment,Comment
+from .models import Profile,Lab,Experiment,Comment,Discussion,Reply
 
 # Create your views here.
 def home(request):
@@ -56,6 +56,30 @@ def experiment_detail(request,exp_id):
             return redirect('experiment_detail',exp_id=exp_id)
 
     return render(request,'main_app/experiment_detail.html',{'experiment':experiment ,'comments': comments , 'user_commented': user_commented})
+
+
+@login_required
+def experiment_discussion(request, exp_id):
+    experiment = Experiment.objects.get(id=exp_id)
+
+    discussions = Discussion.objects.filter(experiment=experiment).order_by("created_at")
+
+    if request.method == "POST":
+        body = request.POST.get("body")
+        image = request.FILES.get("image")
+        parent_discussion_id = request.POST.get("discussion_id")
+
+        if body:
+            if parent_discussion_id:
+                discussion = Discussion.objects.get(id=parent_discussion_id)
+                Reply.objects.create(discussion=discussion,user=request.user,body=body,image=image)
+            else:
+                Discussion.objects.create(experiment=experiment,user=request.user,body=body,image=image)
+        return redirect("experiment_discussion", exp_id=exp_id)
+
+    all_replies = Reply.objects.filter(discussion__experiment=experiment).order_by("created_at")
+
+    return render(request, "main_app/discussion.html", {"experiment": experiment,"discussions": discussions,"all_replies": all_replies,})
 
 
 def signup(request):

@@ -48,7 +48,9 @@
     <textarea name="content" placeholder="Add a comment"></textarea>
     <button type="submit">Post Comment</button>
   </form>
-
   {% endif %}
 </div>
+
+<a href="{% url 'experiment_discussion' experiment.id %}">Joining the discussion</a>
+
 {% endblock %}

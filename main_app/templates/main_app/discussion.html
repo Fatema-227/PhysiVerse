@@ -1,0 +1,49 @@
+{% extends "main_app/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">Discussion Room: {{ experiment.title }}</h2>
+
+<form method="post" enctype="multipart/form-data" style="margin-bottom:30px;">
+    {% csrf_token %}
+    <textarea name="body" placeholder="Start a new discussion..." style="width:100%; height:60px; margin-bottom:10px;"></textarea>
+    <input type="file" name="image" style="margin-bottom:10px;">
+    <button type="submit" style="padding:5px 10px;">Post</button>
+</form>
+
+<hr>
+
+{% for d in discussions %}
+<div style="padding:10px; border:1px solid #ddd; border-radius:10px; margin-bottom:15px;">
+    <strong>{{ d.user.username }}</strong>
+    <p>{{ d.body }}</p>
+    {% if d.image %}
+        <img src="{% static d.image|cut:'main_app/static/' %}" width="200" style="margin-top:5px;">
+    {% endif %}
+
+    <div style="margin-left:30px; margin-top:10px;">
+        {% for reply in all_replies %}
+            {% if reply.discussion.id == d.id %}
+            <div style="padding:5px; border-bottom:1px solid #eee;">
+                <strong>{{ reply.user.username }}</strong>
+                <p>{{ reply.body }}</p>
+                {% if reply.image %}
+                    <img src="{% static reply.image|cut:'main_app/static/' %}" width="150">
+                {% endif %}
+            </div>
+            {% endif %}
+        {% endfor %}
+
+        <form method="post" enctype="multipart/form-data" style="margin-top:10px;">
+            {% csrf_token %}
+            <textarea name="body" placeholder="Write a reply..." style="width:100%; height:50px; margin-bottom:5px;"></textarea>
+            <input type="file" name="image" style="margin-bottom:5px;">
+            <input type="hidden" name="discussion_id" value="{{ d.id }}">
+            <button type="submit" style="padding:3px 8px;">Reply</button>
+        </form>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
