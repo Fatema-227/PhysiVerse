@@ -11,6 +11,10 @@
   <h2>{{ experiment.title }}</h2>
   <p>{{ experiment.description }}</p>
 
+  {% if experiment.procedure %}
+  <button onclick="openPopup()" >How to perform the experiment</button>
+    {% endif %}
+
   {% if experiment.Simulation_Data %}
   <div class="simulation-container">
     <h3>Interactive Simulation</h3>
@@ -61,5 +65,33 @@
 </div>
 
 <a href="{% url 'experiment_discussion' experiment.id %}" style="display:inline-block; padding:10px 20px; background-color:#8B6F47; color:white; text-decoration:none; border-radius:5px; margin-top:20px;">Joining the discussion</a>
+
+<div id="procedurePopup" class="popup-overlay" onclick="closePopup(event)">
+  <div class="popup-content" onclick="event.stopPropagation()">
+    <button class="popup-close" onclick="closePopup()">&times;</button>
+    <h3>How to perform the experiment</h3>
+    <div style="margin-top: 15px; text-align: left;">
+      {{ experiment.procedure|safe }}
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function openPopup() {
+    document.getElementById('procedurePopup').classList.add('active');
+  }
+
+  function closePopup(event) {
+    if (!event || event.target.id === 'procedurePopup') {
+      document.getElementById('procedurePopup').classList.remove('active');
+    }
+  }
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closePopup();
+    }
+  });
+</script>
 
 {% endblock %}

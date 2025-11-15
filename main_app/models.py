@@ -30,6 +30,7 @@ class Experiment(models.Model):
     description=models.TextField(max_length=900)
     Simulation_Data=models.TextField()
     video=models.FileField(upload_to='main_app/static/videos/',default="")
+    procedure=models.TextField(blank=True, default="")
     created_at=models.DateTimeField(auto_now_add=True)
     lab=models.ForeignKey(Lab,on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
