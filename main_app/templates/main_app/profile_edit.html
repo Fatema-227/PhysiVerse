@@ -5,12 +5,19 @@
   <h2 class="mb-4">Edit Profile</h2>
 
   <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="mb-3">
-        <label for="id_avatar" class="form-label">Avatar:</label>
-        <br>
-        <img src={% static profile.avatar|cut:'main_app/static' %} class="avatar" alt="">
-      </div>
+    {% csrf_token %}
+<div class="mb-3">
+  <label for="id_avatar" class="form-label">Current Avatar:</label>
+  <br>
+  {% if profile.avatar %}
+    <img src="{% static profile.avatar|cut:'main_app/static/' %}" class="avatar" alt="" style="max-width: 150px; border-radius: 50%; margin-bottom: 15px;">
+    <br>
+  {% endif %}
+  <label for="id_avatar" class="form-label">New Avatar:</label>
+  <br>
+  <input type="file" name="avatar" accept="image/*" id="id_avatar" class="form-control" style="max-width: 400px;">
+</div>
+
 
       <div class="mb-3">
         <label for="id_bio" class="form-label">Bio:</label>
