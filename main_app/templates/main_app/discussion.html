@@ -16,21 +16,37 @@
 
 {% for d in discussions %}
 <div style="padding:10px; border:1px solid #ddd; border-radius:10px; margin-bottom:15px;">
-    <strong>{{ d.user.username }}</strong>
-    <p>{{ d.body }}</p>
-    {% if d.image %}
-        <img src="{% static d.image|cut:'main_app/static/' %}" width="200" style="margin-top:5px;">
-    {% endif %}
+    <div style="display:flex; align-items:flex-start; gap:10px;">
+        {% if d.user.profile.avatar %}
+            <img src="{% static d.user.profile.avatar|cut:'main_app/static/' %}"
+                 style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+        {% endif %}
 
-    <div style="margin-left:30px; margin-top:10px;">
+        <div style="flex:1;">
+            <strong>{{ d.user.username }}</strong>
+            <p style="margin:5px 0;">{{ d.body }}</p>
+            {% if d.image %}
+                <img src="{% static d.image|cut:'main_app/static/' %}" width="200" style="margin-top:5px; border-radius:5px;">
+            {% endif %}
+        </div>
+    </div>
+
+    <div style="margin-left:50px; margin-top:10px;">
         {% for reply in all_replies %}
             {% if reply.discussion.id == d.id %}
-            <div style="padding:5px; border-bottom:1px solid #eee;">
-                <strong>{{ reply.user.username }}</strong>
-                <p>{{ reply.body }}</p>
-                {% if reply.image %}
-                    <img src="{% static reply.image|cut:'main_app/static/' %}" width="150">
+            <div style="padding:10px; border-bottom:1px solid #eee; display:flex; align-items:flex-start; gap:10px;">
+                {% if reply.user.profile.avatar %}
+                    <img src="{% static reply.user.profile.avatar|cut:'main_app/static/' %}"
+                         style="width:35px; height:35px; border-radius:50%; object-fit:cover;">
                 {% endif %}
+
+                <div style="flex:1;">
+                    <strong>{{ reply.user.username }}</strong>
+                    <p style="margin:5px 0;">{{ reply.body }}</p>
+                    {% if reply.image %}
+                        <img src="{% static reply.image|cut:'main_app/static/' %}" width="150" style="border-radius:5px;">
+                    {% endif %}
+                </div>
             </div>
             {% endif %}
         {% endfor %}

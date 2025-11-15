@@ -33,13 +33,22 @@
 
 <br>
   <h3>Comments</h3>
-  <ul>
+  <ul style="list-style:none; padding:0;">
     {% for comment in comments %}
-    <li>
-      <strong> {{ comment.user.username }} : </strong>
-      {{ comment.content  }}
+    <li style="margin-bottom:15px; padding:10px; border:1px solid #ddd; border-radius:8px;">
+      <div style="display:flex; align-items:flex-start; gap:10px;">
+        {% if comment.user.profile.avatar %}
+          <img src="{% static comment.user.profile.avatar|cut:'main_app/static/' %}"
+               style="width:40px; height:40px; border-radius:50%; object-fit:cover;">
+        {% endif %}
+
+        <div style="flex:1;">
+          <strong>{{ comment.user.username }}</strong>
+          <p style="margin:5px 0;">{{ comment.content }}</p>
+        </div>
+      </div>
     </li>
-        {% endfor %}
+    {% endfor %}
   </ul>
 
   {% if user.is_authenticated and not user_commented %}
@@ -51,6 +60,6 @@
   {% endif %}
 </div>
 
-<a href="{% url 'experiment_discussion' experiment.id %}">Joining the discussion</a>
+<a href="{% url 'experiment_discussion' experiment.id %}" style="display:inline-block; padding:10px 20px; background-color:#8B6F47; color:white; text-decoration:none; border-radius:5px; margin-top:20px;">Joining the discussion</a>
 
 {% endblock %}
