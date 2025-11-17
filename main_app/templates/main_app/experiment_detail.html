@@ -9,11 +9,82 @@
 <div class="experiment-detail">
 
   <h2>{{ experiment.title }}</h2>
+
   <p>{{ experiment.description }}</p>
 
   {% if experiment.procedure %}
   <button onclick="openPopup()">How to perform the experiment</button>
   {% endif %}
+
+  <div class="audio-notes-section" style="margin: 30px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+    <h3 style="color: #8B6F47; margin-bottom: 20px;">Audio Notes</h3>
+
+    <div class="audio-recording" style="margin-bottom: 30px;">
+      <form method="post" action="{% url 'add_audio_note' experiment.id %}" enctype="multipart/form-data" id="audioNoteForm">
+        {% csrf_token %}
+
+        <div style="margin-bottom: 15px;">
+          <label style="display: block; font-weight: bold; margin-bottom: 5px;">Record Audio:</label>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <button type="button" id="startRecord" style="padding: 8px 16px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Start Recording</button>
+            <button type="button" id="stopRecord" disabled style="padding: 8px 16px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Stop Recording</button>
+            <span id="recordingStatus" style="color: #666; font-size: 14px;">Ready to record</span>
+          </div>
+          <audio id="audioPreview" controls style="margin-top: 10px; display: none;"></audio>
+          <input type="file" name="audio_file" id="audioFileInput" accept="audio/*" style="display: none;">
+          <input type="hidden" name="audio_blob" id="audioBlob">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+          <label for="id_note" style="display: block; font-weight: bold; margin-bottom: 5px;">Note:</label>
+          <textarea name="note" id="id_note" rows="3" placeholder="Add a note for this recording..." style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+        </div>
+
+        <button type="submit" style="padding: 10px 20px; background-color: #8B6F47; color: white; border: none; border-radius: 4px; cursor: pointer;">Save Audio Note</button>
+      </form>
+    </div>
+
+    <div class="existing-audio-notes">
+      <h4 style="color: #8B6F47; margin-bottom: 15px;">Recorded Notes</h4>
+      {% if experiment.audionote_set.all %}
+        <div style="display: grid; gap: 15px;">
+          {% for audio_note in experiment.audionote_set.all %}
+          <div class="audio-note-item" style="padding: 15px; border: 1px solid #eee; border-radius: 6px; background-color: #f9f9f9;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+              <strong>{{ audio_note.user.username }}</strong>
+              <small style="color: #666;">{{ audio_note.created_at|date:"M d, Y H:i" }}</small>
+            </div>
+
+            <audio controls style="width: 100%; margin-bottom: 10px;">
+              <source src="{% static audio_note.audio_file|cut:'main_app/static/' %}" type="audio/wav">
+              Your browser does not support the audio element.
+            </audio>
+
+            <div id="audio-note-{{ audio_note.id }}-text">
+              <p style="margin: 0; color: #333;">{{ audio_note.note }}</p>
+            </div>
+
+            <div id="audio-note-{{ audio_note.id }}-edit" style="display: none;">
+              <form method="post" action="{% url 'edit_audio_note' audio_note.id %}">
+                {% csrf_token %}
+                <textarea name="note" style="width: 100%; height: 60px; margin-bottom: 10px;">{{ audio_note.note }}</textarea>
+                <button type="submit" style="padding: 5px 10px; background-color: #28a745; color: white; border: none; border-radius: 3px; margin-right: 5px;">Save</button>
+                <button type="button" onclick="cancelAudioNoteEdit({{ audio_note.id }})" style="padding: 5px 10px; background-color: #6c757d; color: white; border: none; border-radius: 3px;">Cancel</button>
+              </form>
+            </div>
+
+            {% if user == audio_note.user %}
+            <div style="margin-top: 10px;">
+              <button onclick="editAudioNote({{ audio_note.id }})" style="padding: 5px 10px; background-color: #8B6F47; color: white; border: none; border-radius: 3px; margin-right: 5px; cursor: pointer;">Edit Note</button>
+              <button onclick="showDeleteAudioNoteModal({{ audio_note.id }})" style="padding: 5px 10px; background-color: #dc3545; color: white; border: none; border-radius: 3px; cursor: pointer;">Delete</button>
+            </div>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
 
   {% if experiment.Simulation_Data %}
   <div class="simulation-container">
@@ -85,7 +156,6 @@
 
 <a href="{% url 'experiment_discussion' experiment.id %}" style="display:inline-block; padding:10px 20px; background-color:#8B6F47; color:white; text-decoration:none; border-radius:5px; margin-top:20px;">Joining the discussion</a>
 
-
 <div id="procedurePopup" class="popup-overlay" onclick="closePopup(event)">
   <div class="popup-content" onclick="event.stopPropagation()">
     <button class="popup-close" onclick="closePopup()">&times;</button>
@@ -110,7 +180,125 @@
   </div>
 </div>
 
+<div id="deleteExperimentModal" class="popup-overlay" style="display:none;">
+  <div class="popup-content" style="max-width:450px;" onclick="event.stopPropagation()">
+    <h3 style="margin-top:0; color:#dc3545;">⚠️ Delete Experiment</h3>
+    <p style="margin:15px 0; font-size:16px;">Are you sure you want to delete this experiment?</p>
+    <p style="margin:15px 0; color:#666; font-size:14px;">This action cannot be undone. All comments and discussions will also be deleted.</p>
+    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
+      <button onclick="closeDeleteExperimentModal()" style="padding:10px 20px; background-color:#6c757d; color:white; border:none; border-radius:4px; cursor:pointer;">Cancel</button>
+      <form method="post" action="{% url 'delete_experiment' experiment.id %}" style="display:inline; margin:0;">
+        {% csrf_token %}
+        <button type="submit" style="padding:10px 20px; background-color:#dc3545; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold;">Delete Experiment</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="deleteAudioNoteModal" class="popup-overlay" style="display:none;">
+  <div class="popup-content" style="max-width:400px;" onclick="event.stopPropagation()">
+    <h3 style="margin-top:0; color:#dc3545;">Confirm Delete</h3>
+    <p style="margin:15px 0;">Are you sure you want to delete this audio note?</p>
+    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
+      <button onclick="closeDeleteAudioNoteModal()" style="padding:8px 16px; background-color:#6c757d; color:white; border:none; border-radius:4px; cursor:pointer;">Cancel</button>
+      <form id="deleteAudioNoteForm" method="post" style="display:inline; margin:0;">
+        {% csrf_token %}
+        <button type="submit" style="padding:8px 16px; background-color:#dc3545; color:white; border:none; border-radius:4px; cursor:pointer;">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% if user == experiment.user %}
+<div style="margin-top: 30px;">
+  <a href="{% url 'edit_experiment' experiment.id %}">Edit Experiment</a>
+  <button onclick="showDeleteExperimentModal()">Delete Experiment</button>
+</div>
+{% endif %}
+
 <script>
+  let mediaRecorder;
+  let audioChunks = [];
+  let isRecording = false;
+
+  const startRecordButton = document.getElementById('startRecord');
+  const stopRecordButton = document.getElementById('stopRecord');
+  const recordingStatus = document.getElementById('recordingStatus');
+  const audioPreview = document.getElementById('audioPreview');
+  const audioFileInput = document.getElementById('audioFileInput');
+  const audioBlobInput = document.getElementById('audioBlob');
+
+  startRecordButton.addEventListener('click', async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
+
+      mediaRecorder.ondataavailable = (event) => {
+        audioChunks.push(event.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        audioPreview.src = audioUrl;
+        audioPreview.style.display = 'block';
+
+        const audioFile = new File([audioBlob], `recording-${Date.now()}.wav`, { type: 'audio/wav' });
+
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(audioFile);
+        audioFileInput.files = dataTransfer.files;
+
+        audioBlobInput.value = URL.createObjectURL(audioBlob);
+      };
+
+      mediaRecorder.start();
+      isRecording = true;
+      startRecordButton.disabled = true;
+      stopRecordButton.disabled = false;
+      recordingStatus.textContent = 'Recording...';
+      recordingStatus.style.color = '#dc3545';
+    } catch (error) {
+      console.error('Error accessing microphone:', error);
+      alert('Error accessing microphone. Please check permissions.');
+    }
+  });
+
+  stopRecordButton.addEventListener('click', () => {
+    if (mediaRecorder && isRecording) {
+      mediaRecorder.stop();
+      isRecording = false;
+      startRecordButton.disabled = false;
+      stopRecordButton.disabled = true;
+      recordingStatus.textContent = 'Recording completed';
+      recordingStatus.style.color = '#28a745';
+      mediaRecorder.stream.getTracks().forEach(track => track.stop());
+    }
+  });
+
+  function editAudioNote(audioNoteId) {
+    document.getElementById('audio-note-' + audioNoteId + '-text').style.display = 'none';
+    document.getElementById('audio-note-' + audioNoteId + '-edit').style.display = 'block';
+  }
+
+  function cancelAudioNoteEdit(audioNoteId) {
+    document.getElementById('audio-note-' + audioNoteId + '-text').style.display = 'block';
+    document.getElementById('audio-note-' + audioNoteId + '-edit').style.display = 'none';
+  }
+
+  function showDeleteAudioNoteModal(audioNoteId) {
+    const modal = document.getElementById('deleteAudioNoteModal');
+    const form = document.getElementById('deleteAudioNoteForm');
+    form.action = '/audio-note/delete/' + audioNoteId + '/';
+    modal.style.display = 'flex';
+  }
+
+  function closeDeleteAudioNoteModal() {
+    document.getElementById('deleteAudioNoteModal').style.display = 'none';
+  }
+
   function openPopup() {
     document.getElementById('procedurePopup').classList.add('active');
   }
@@ -142,16 +330,38 @@
     document.getElementById('deleteModal').style.display = 'none';
   }
 
+  function showDeleteExperimentModal() {
+    document.getElementById('deleteExperimentModal').style.display = 'flex';
+  }
+
+  function closeDeleteExperimentModal() {
+    document.getElementById('deleteExperimentModal').style.display = 'none';
+  }
+
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
       closePopup();
       closeDeleteModal();
+      closeDeleteExperimentModal();
+      closeDeleteAudioNoteModal();
     }
   });
 
   document.getElementById('deleteModal').addEventListener('click', function(event) {
     if (event.target.id === 'deleteModal') {
       closeDeleteModal();
+    }
+  });
+
+  document.getElementById('deleteExperimentModal').addEventListener('click', function(event) {
+    if (event.target.id === 'deleteExperimentModal') {
+      closeDeleteExperimentModal();
+    }
+  });
+
+  document.getElementById('deleteAudioNoteModal').addEventListener('click', function(event) {
+    if (event.target.id === 'deleteAudioNoteModal') {
+      closeDeleteAudioNoteModal();
     }
   });
 </script>

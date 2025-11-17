@@ -821,4 +821,20 @@ main.container {
     white-space: pre-line;
   }
 
-  
+  .card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title a {
+    color: #333;
+}
+
+.card-title a:hover {
+    color: #007bff;
+}

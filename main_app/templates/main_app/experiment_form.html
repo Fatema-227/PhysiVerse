@@ -1,0 +1,89 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+
+{% block title %}
+{% if action == 'Create' %}Create New Experiment{% else %}Edit Experiment{% endif %}
+{% endblock %}
+
+{% block content %}
+<div style="max-width:800px; margin:0 auto; padding:20px;">
+  <h1 style="color:#8B6F47; margin-bottom:10px;">
+    {% if action == 'Create' %}
+      Create New Experiment
+    {% else %}
+      Edit Experiment
+    {% endif %}
+  </h1>
+
+  {% if lab %}
+    <p style="color:#666; margin-bottom:30px;">Lab: <strong>{{ lab.name }}</strong></p>
+  {% elif experiment %}
+    <p style="color:#666; margin-bottom:30px;">Lab: <strong>{{ experiment.lab.name }}</strong></p>
+  {% endif %}
+
+  <form method="POST" enctype="multipart/form-data" style="background:#f9f9f9; padding:30px; border-radius:10px; border:1px solid #ddd;">
+    {% csrf_token %}
+
+    <div style="margin-bottom:20px;">
+      <label for="id_title" style="display:block; font-weight:bold; margin-bottom:5px; color:#333;">
+        Title: <span style="color:red;">*</span>
+      </label>
+      {{ form.title }}
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <label for="id_description" style="display:block; font-weight:bold; margin-bottom:5px; color:#333;">
+        Description: <span style="color:red;">*</span>
+      </label>
+      {{ form.description }}
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <label for="id_Simulation_Data" style="display:block; font-weight:bold; margin-bottom:5px; color:#333;">
+        Simulation Data:<span style="color:red;">*</span>
+      </label>
+      <small style="color:#666; display:block; margin-bottom:5px;">Enter HTML code for interactive simulation</small>
+      {{ form.Simulation_Data }}
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <label for="id_procedure" style="display:block; font-weight:bold; margin-bottom:5px; color:#333;">
+        Procedure:
+      </label>
+      <small style="color:#666; display:block; margin-bottom:5px;">Step-by-step instructions for the experiment</small>
+      {{ form.procedure }}
+    </div>
+
+    <div style="margin-bottom:30px;">
+      <label for="id_video" style="display:block; font-weight:bold; margin-bottom:5px; color:#333;">
+        Video:
+      </label>
+      <small style="color:#666; display:block; margin-bottom:5px;">Upload experiment demonstration video (MP4)</small>
+
+      {% if experiment and experiment.video %}
+        <p style="margin:10px 0 5px 0; color:#666; font-size:13px;">
+          Choose a new file to replace the current video:
+        </p>
+      {% endif %}
+
+      <input type="file" name="video" accept="video/*" id="id_video" style="width:100%; padding:8px; background-color:white; border:1px solid #ccc; border-radius:5px; cursor:pointer;">
+    </div>
+
+    <div style="display:flex; gap:10px; justify-content:flex-start; border-top:1px solid #ddd; padding-top:20px;">
+      <button type="submit" style="padding:12px 30px; background-color:#8B6F47; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px; font-weight:bold;">
+        {% if action == 'Create' %}
+          Create Experiment
+        {% else %}
+          Save Changes
+        {% endif %}
+      </button>
+
+      <a href="{% if lab %}{% url 'lab_detail' lab.id %}{% else %}{% url 'experiment_detail' experiment.id %}{% endif %}"
+         style="display:inline-block; padding:12px 30px; background-color:#6c757d; color:white; text-decoration:none; border-radius:5px; font-size:16px; font-weight:bold;">
+        Cancel
+      </a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

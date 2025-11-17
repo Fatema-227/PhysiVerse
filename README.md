@@ -93,3 +93,5 @@ Database(SQL):
 - [Created-at](https://www.geeksforgeeks.org/python/how-to-add-created-at-and-updated-at-fields-to-all-django-models-using-timestampedmodel/)
 - [Comment](https://stackoverflow.com/questions/47415600/django-add-comment-model-for-comment)
 - [popup](https://www.w3schools.com/howto/howto_js_popup.asp)
+- [Audio](https://dev.to/abhinowww/how-to-record-audio-in-python-automatically-detect-speech-and-silence-4951)
+- [Record](https://www.tutorialspoint.com/python/create_a_voice_recorder.htm)
