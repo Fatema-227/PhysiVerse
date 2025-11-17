@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
 from .forms import CustomSignupForm, UpdateProfileForm, TypeForm,AudioNoteForm
 from .models import Profile, Lab, Experiment, Comment, Discussion, Reply,AudioNote
 
@@ -29,6 +29,7 @@ def edit_profile(request):
         form = UpdateProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
+            messages.success(request, "Your profile has been updated successfully ")
             return redirect('profile')
     else:
         form = UpdateProfileForm(instance=profile)
@@ -69,6 +70,7 @@ def create_experiment(request, lab_id):
                 new_experiment.video = request.FILES['video']
 
             new_experiment.save()
+            messages.success(request, "Experiment created successfully")
             return redirect('lab_detail', lab_id=lab_id)
     else:
         form = TypeForm()
@@ -85,6 +87,7 @@ def edit_experiment(request, exp_id):
     experiment = Experiment.objects.get(id=exp_id)
 
     if request.user != experiment.user:
+        messages.error(request, "You are not allowed to edit this experiment ")
         return redirect('experiment_detail', exp_id=exp_id)
 
     if request.method == 'POST':
@@ -96,6 +99,7 @@ def edit_experiment(request, exp_id):
                 updated_experiment.video = request.FILES['video']
 
             updated_experiment.save()
+            messages.success(request, "Experiment updated successfully ")
             return redirect('experiment_detail', exp_id=exp_id)
     else:
         form = TypeForm(instance=experiment)
@@ -114,6 +118,7 @@ def delete_experiment(request, exp_id):
 
     if request.user == experiment.user:
         experiment.delete()
+        messages.info(request, "Experiment deleted ")
 
     return redirect('lab_detail', lab_id=lab_id)
 
@@ -128,6 +133,7 @@ def experiment_detail(request, exp_id):
         content = request.POST.get('content')
         if content:
             Comment.objects.create(experiment=experiment, user=request.user, content=content)
+            messages.success(request, "Your comment has been added ")
             return redirect('experiment_detail', exp_id=exp_id)
 
     return render(request, 'main_app/experiment_detail.html', {
@@ -143,6 +149,7 @@ def edit_comment(request, comment_id):
     if request.user == comment.user and request.method == 'POST':
         comment.content = request.POST.get('content')
         comment.save()
+        messages.success(request, "Comment updated ")
     return redirect('experiment_detail', exp_id=comment.experiment.id)
 
 
@@ -152,6 +159,7 @@ def delete_comment(request, comment_id):
     exp_id = comment.experiment.id
     if request.user == comment.user:
         comment.delete()
+        messages.info(request, "Comment deleted")
     return redirect('experiment_detail', exp_id=exp_id)
 
 
@@ -293,6 +301,7 @@ def signup(request):
             Profile.objects.create(user=user, avatar=avatar, bio=bio)
 
             login(request, user)
+            messages.success(request, "Your account has been created successfully ")
             return redirect('home')
         else:
             error_message = 'Invalid Sign Up - Try again later...'

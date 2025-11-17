@@ -95,3 +95,4 @@ Database(SQL):
 - [popup](https://www.w3schools.com/howto/howto_js_popup.asp)
 - [Audio](https://dev.to/abhinowww/how-to-record-audio-in-python-automatically-detect-speech-and-silence-4951)
 - [Record](https://www.tutorialspoint.com/python/create_a_voice_recorder.htm)
+- [Messages](https://docs.djangoproject.com/en/5.2/ref/contrib/messages/)

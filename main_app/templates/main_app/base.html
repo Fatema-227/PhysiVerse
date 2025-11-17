@@ -2,53 +2,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhysiVerse</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhysiVerse</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
-  <header class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper">
-        <ul>
-          <li>
-            <a href="/" class="left brand-logo">&nbsp;&nbsp;PhysiVerse</a>
-          </li>
-        </ul>
-        <ul class="right">
-  <li><a href="{% url 'about' %}">About</a></li>
-  {% if user.is_authenticated %}
-    <li><a href="{% url 'labs_list' %}">All Labs</a></li>
-    <li><a href="{% url 'profile' %}">Profile</a></li>
-    <br>
-    <br>
-    <li>
-      <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-      </form>
-    </li>
-  {% else %}
-    <li><a href="{% url 'login' %}">Login</a></li>
-    <li><a href="{% url 'signup' %}">Signup</a></li>
-  {% endif %}
+
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+  {% endfor %}
 </ul>
-      </div>
-    </nav>
-  </header>
+{% endif %}
 
-  <main class="container">
-    {% block content %}
-    {% endblock %}
-  </main>
-
-  <footer class="page-footer">
-    <div class="right">
-      All Rights Reserved, &copy; 2025 PhysiVerse &nbsp;
+<header class="navbar-fixed">
+  <nav class="nav-wrapper">
+    <div class="nav-content">
+      <a href="/" class="brand-logo">PhysiVerse</a>
+      <ul class="right">
+        <li><a href="{% url 'about' %}">About</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'labs_list' %}">All Labs</a></li>
+        <li><a href="{% url 'profile' %}">Profile</a></li>
+        <li>
+          <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="logout-btn">Logout</a>
+          <form id="logout-form" action="{% url 'logout' %}" method="post" style="display:none;">
+            {% csrf_token %}
+          </form>
+        </li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'signup' %}">Signup</a></li>
+        {% endif %}
+      </ul>
     </div>
-  </footer>
+  </nav>
+</header>
+
+<main class="container">
+{% block content %}
+{% endblock %}
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const messages = document.querySelectorAll('.messages li');
+  messages.forEach((msg, index) => {
+    setTimeout(() => {
+      msg.style.opacity = '1';
+      msg.style.transform = 'translateX(0)';
+    }, index * 200);
+
+    setTimeout(() => {
+      msg.style.opacity = '0';
+      msg.style.transform = 'translateX(20px)';
+      setTimeout(() => msg.remove(), 300);
+    }, 3000 + index * 200);
+  });
+});
+</script>
+
 </body>
 </html>
