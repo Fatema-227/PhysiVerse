@@ -1,18 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary-sage: #8B9D83;
-  --dark-sage: #6B7D63;
-  --cream: #F5F1E8;
-  --off-white: #FEFCF7;
-  --light-beige: #EDE8DC;
-  --text-dark: #4A4A3A;
-  --text-light: #7A7A6A;
-  --accent-olive: #9AAB8E;
-  --border-light: #D4CFC4;
-  --shadow-soft: rgba(139, 157, 131, 0.15);
-  --shadow-medium: rgba(107, 125, 99, 0.25);
+  --primary-sage: #C2A878; /* اللون الأساسي (بيج داكن) */
+  --dark-sage: #8A6E47; /* بني أنيق */
+  --cream: #F9F5EF; /* بيج فاتح */
+  --off-white: #FFFFFF;
+  --light-beige: #EFE7DB; /* بيج لطيف */
+  --text-dark: #4B3F32; /* بني داكن للنص */
+  --text-light: #8F8576; /* رمادي مائل للبني */
+  --accent-olive: #D0A85C; /* ذهبي فاتح */
+  --border-light: #DCCDBA;
+  --shadow-soft: rgba(168, 145, 107, 0.15);
+  --shadow-medium: rgba(138, 110, 71, 0.28);
 }
+
 
 * {
   margin: 0;
@@ -952,4 +953,16 @@ audio {
   border-radius: 6px !important; /* شكل مستطيل بزوايا خفيفة */
   padding: 12px 25px;
   font-size: 16px;
+}
+
+#deleteForm{
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+#deleteAudioNoteForm{
+  border: none;
+  background: none;
+  box-shadow: none;
 }
