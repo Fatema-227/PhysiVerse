@@ -1,19 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
 
-:root {
-  --primary-sage: #C2A878; /* اللون الأساسي (بيج داكن) */
-  --dark-sage: #8A6E47; /* بني أنيق */
-  --cream: #F9F5EF; /* بيج فاتح */
-  --off-white: #FFFFFF;
-  --light-beige: #EFE7DB; /* بيج لطيف */
-  --text-dark: #4B3F32; /* بني داكن للنص */
-  --text-light: #8F8576; /* رمادي مائل للبني */
-  --accent-olive: #D0A85C; /* ذهبي فاتح */
-  --border-light: #DCCDBA;
-  --shadow-soft: rgba(168, 145, 107, 0.15);
-  --shadow-medium: rgba(138, 110, 71, 0.28);
+* {
+  font-family: "Delius", cursive !important;
 }
 
+:root {
+  --primary-sage: #4caf50;
+  --dark-sage: #388e3c;
+  --cream: #f1f8f4;
+  --off-white: #ffffff;
+  --light-beige: #e8f5e9;
+  --text-dark: #2e3830;
+  --text-light: #5d6d5f;
+  --accent-olive: #66bb6a;
+  --border-light: #c8e6c9;
+  --shadow-soft: rgba(76, 175, 80, 0.15);
+  --shadow-medium: rgba(56, 142, 60, 0.28);
+}
 
 * {
   margin: 0;
@@ -22,7 +25,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Delius", cursive;
   background: linear-gradient(135deg, var(--cream) 0%, var(--light-beige) 100%);
   color: var(--text-dark);
   min-height: 100vh;
@@ -106,7 +109,9 @@ main {
   min-height: calc(100vh - 80px);
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: var(--text-dark);
   margin-bottom: 25px;
   font-weight: 600;
@@ -128,7 +133,7 @@ h2 {
 }
 
 h2::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -161,7 +166,7 @@ h3 {
 }
 
 .lab-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -253,7 +258,7 @@ input[type="submit"] {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px var(--shadow-soft);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   letter-spacing: 0.5px;
 }
 
@@ -293,7 +298,7 @@ select {
   border: 1px solid var(--border-light);
   border-radius: 15px;
   font-size: 16px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   transition: all 0.3s ease;
   background: var(--cream);
   color: var(--text-dark);
@@ -389,7 +394,7 @@ form[style*="margin-top:10px"] textarea {
   border: 1px solid var(--border-light);
   border-radius: 15px;
   padding: 14px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   transition: all 0.3s ease;
 }
 
@@ -400,7 +405,7 @@ form[style*="margin-top:10px"] textarea:focus {
   box-shadow: 0 0 0 3px rgba(139, 157, 131, 0.1);
 }
 
-button[style*="background-color:#8B6F47"],
+button[style*="background-color:#4caf50"],
 button[onclick*="edit"],
 button[onclick*="Delete"],
 button[onclick*="show"] {
@@ -413,7 +418,7 @@ button[onclick*="show"] {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 3px 12px var(--shadow-soft);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 button[style*="background-color:#8B6F47"]:hover,
@@ -438,8 +443,8 @@ button[onclick*="show"]:hover {
 /* Profile - Enhanced Design */
 .profile-header {
   display: flex;
-  flex-direction: column;   /* يخلي الصورة فوق والاسم تحت */
-  align-items: center;      /* يوسّط كل شيء */
+  flex-direction: column; /* يخلي الصورة فوق والاسم تحت */
+  align-items: center; /* يوسّط كل شيء */
 }
 
 .profile-header {
@@ -454,14 +459,19 @@ button[onclick*="show"]:hover {
 }
 
 .profile-header::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
   height: 3px;
-  background: linear-gradient(90deg, transparent, var(--primary-sage), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary-sage),
+    transparent
+  );
 }
 
 .profile-header .avatar {
@@ -639,7 +649,7 @@ button[onclick*="show"]:hover {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  color: #B85450;
+  color: #b85450;
   border-bottom: none;
 }
 
@@ -689,16 +699,16 @@ button[onclick*="show"]:hover {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px var(--shadow-soft);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .popup-content button[onclick*="close"] {
-  background-color: #9B9B8B;
+  background-color: #4caf50;
   color: var(--off-white);
 }
 
 .popup-content button[onclick*="close"]:hover {
-  background-color: #7B7B6B;
+  background-color: #4caf50;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
@@ -715,11 +725,11 @@ button[onclick*="show"]:hover {
 }
 
 #deleteExperimentModal button[type="submit"] {
-  background-color: #B85450;
+  background-color: #b85450;
 }
 
 #deleteExperimentModal button[type="submit"]:hover {
-  background-color: #A04440;
+  background-color: #a04440;
 }
 
 #procedurePopup .popup-content {
@@ -775,15 +785,15 @@ button[onclick*="show"]:hover {
 }
 
 .messages li.success {
-  border-left-color: #7A9D6F;
+  border-left-color: #7a9d6f;
 }
 
 .messages li.error {
-  border-left-color: #B85450;
+  border-left-color: #b85450;
 }
 
 .messages li.warning {
-  border-left-color: #D4A574;
+  border-left-color: #d4a574;
 }
 
 /* Video */
@@ -825,7 +835,6 @@ audio {
   outline: none;
 }
 
-/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -877,6 +886,10 @@ audio {
   .profile-header,
   form {
     padding: 30px;
+    height: 80px;
+  }
+  form.signup-form {
+    height: 300px;
   }
 
   .popup-content {
@@ -902,7 +915,6 @@ audio {
   }
 }
 
-/* Utility Classes */
 .mt-5 {
   margin-top: 3rem;
 }
@@ -950,23 +962,23 @@ audio {
   }
 }
 .back-btn {
-  border-radius: 6px !important; /* شكل مستطيل بزوايا خفيفة */
+  border-radius: 6px !important;
   padding: 12px 25px;
   font-size: 16px;
 }
 
-#deleteForm{
+#deleteForm {
   border: none;
   background: none;
   box-shadow: none;
 }
 
-#deleteAudioNoteForm{
+#deleteAudioNoteForm {
   border: none;
   background: none;
   box-shadow: none;
 }
-/* إزالة المسافة من أعلى صفحة البروفايل */
+
 .profile-layout {
   margin-top: 0 !important;
 }
@@ -996,26 +1008,132 @@ main {
   text-align: right;
 }
 
-
-#specific-image-style{
+#specific-image-style {
   width: 550px;
   position: relative;
   left: 130px;
 }
 
-.tagline{
-font-size:1.1rem;
-color:var(--text-light);
-font-weight:500;
-margin-top:-30px;
-margin-bottom:25px;
-padding-left:2px;
-letter-spacing:0.2px;
-opacity:0.9;
+.tagline {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  font-weight: 500;
+  margin-top: -30px;
+  margin-bottom: 25px;
+  padding-left: 2px;
+  letter-spacing: 0.2px;
+  opacity: 0.9;
 }
 
-.container-home-page .title-container .tagline{
-  text-align:center;
-  margin-left:-60px;
+.container-home-page .title-container .tagline {
+  text-align: center;
+  margin-left: -60px;
+}
+
+.title-container {
+  text-align: center;
+}
+
+.join-btn {
+  display: inline-block;
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s ease-in-out;
+}
+
+.join-btn:hover {
+  background-color: #4caf50;
+  transform: scale(1.05);
+}
+
+/* here */
+
+.signup-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-form {
+  width: 1000px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.signup-form h2 {
+  text-align: center;
+  margin-bottom: 7px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+label {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+
+input,
+textarea {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 7px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+}
+
+textarea {
+  height: 30px;
+}
+#id_password1,
+#id_username,
+#id_password2,
+#id_avatar,
+#id_bio
+{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+.btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: #4caf50;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #4caf50;
 }
 

@@ -1,28 +1,43 @@
 {% extends 'main_app/base.html' %}
 {% block content %}
-    <h2>Sign Up</h2>
+
 <div class="signup-wrapper">
   <form method="POST" enctype="multipart/form-data" class="signup-form">
 
-
+    <h2>Sign Up</h2>
     {% csrf_token %}
 
-    <label>Username:</label>
-    {{ form.username }}
+    <div class="form-grid">
 
-    <label>Password:</label>
-    {{ form.password1 }}
+      <div class="field">
+        <label>Username</label>
+        {{ form.username }}
+      </div>
 
-    <label>Confirm Password:</label>
-    {{ form.password2 }}
+      <div class="field">
+        <label>Password</label>
+        {{ form.password1 }}
+      </div>
 
-    <label>Profile Picture:</label>
-    {{ form.avatar }}
+      <div class="field">
+        <label>Confirm Password</label>
+        {{ form.password2 }}
+      </div>
 
-    <label>Bio:</label>
-    {{ form.bio }}
+      <div class="field">
+        <label>Profile Picture</label>
+        {{ form.avatar }}
+      </div>
 
-    <button type="submit" class="btn w-100">Register</button>
+      <div class="field full-width">
+        <label>Bio</label>
+        {{ form.bio }}
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn">Register</button>
+
   </form>
 </div>
 

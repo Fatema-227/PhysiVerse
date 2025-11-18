@@ -2,12 +2,21 @@
 {% load static %}
 {% block content %}
 <div class="container-home-page">
-<div class="title-container">
-<h1>Welcome to PhysiVerse </h1>
-<p class="tagline">Experience physics. Don't just read it.</p>
-</div>
-<div id="image-wrapper">
-<img src="{% static 'image/home.png' %}" id="specific-image-style">
-</div>
+
+  <div class="title-container">
+    <h1>Welcome to PhysiVerse </h1>
+    <p class="tagline">Experience physics. Don't just read it.</p>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'labs_list' %}" class="join-btn">Dive into the Simulations</a>
+    {% else %}
+        <a href="{% url 'login' %}" class="join-btn">Physics in Action</a>
+    {% endif %}
+  </div>
+
+  <div id="image-wrapper">
+    <img src="{% static 'image/home.png' %}" id="specific-image-style">
+  </div>
+
 </div>
 {% endblock %}

@@ -14,12 +14,12 @@
   {% if user == experiment.user %}
   <div style="display: flex; gap: 10px;">
     <a href="{% url 'edit_experiment' experiment.id %}"
-       style="padding:6px 14px; background-color:#6c757d; color:white; border-radius:4px; text-decoration:none; font-size:14px;">
+       style="padding:6px 14px; background-color:#4caf50; color:white; border:none; border-radius:4px; cursor:pointer; font-size:14px;">
       Edit
     </a>
 
     <button onclick="showDeleteExperimentModal()"
-            style="padding:6px 14px; background-color:#dc3545; color:white; border:none; border-radius:4px; cursor:pointer; font-size:14px;">
+            style="padding:6px 14px; color:white; border:none; border-radius:4px; cursor:pointer; font-size:14px;">
       Delete
     </button>
   </div>
@@ -30,6 +30,15 @@
 
   {% if experiment.procedure %}
   <button onclick="openPopup()">How to perform the experiment</button>
+  {% endif %}
+
+    {% if experiment.Simulation_Data %}
+  <div class="simulation-container">
+    <h3>Interactive Simulation</h3>
+    <div class="simulation-frame">
+      {{ experiment.Simulation_Data|safe }}
+    </div>
+  </div>
   {% endif %}
 
   <div class="audio-notes-section" style="margin: 30px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
@@ -102,15 +111,6 @@
     </div>
   </div>
 
-  {% if experiment.Simulation_Data %}
-  <div class="simulation-container">
-    <h3>Interactive Simulation</h3>
-    <div class="simulation-frame">
-      {{ experiment.Simulation_Data|safe }}
-    </div>
-  </div>
-  {% endif %}
-
   <br>
   {% if experiment.video %}
   <div>
@@ -169,7 +169,7 @@
   {% endif %}
 </div>
 
-<a href="{% url 'experiment_discussion' experiment.id %}" style="display:inline-block; padding:10px 20px; background-color:#8B6F47; color:white; text-decoration:none; border-radius:5px; margin-top:20px;">Joining the discussion</a>
+<a href="{% url 'experiment_discussion' experiment.id %}" style="display:inline-block; padding:10px 20px; background-color:#4caf50; color:white; text-decoration:none; border-radius:5px; margin-top:20px;">Joining the discussion</a>
 
 <div id="procedurePopup" class="popup-overlay" onclick="closePopup(event)">
   <div class="popup-content" onclick="event.stopPropagation()">

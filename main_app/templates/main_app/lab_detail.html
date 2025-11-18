@@ -14,7 +14,7 @@
       <li style="margin-bottom:15px; padding:15px; border:1px solid #ddd; border-radius:8px; background-color:#f9f9f9;">
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <div>
-            <a href="{% url 'experiment_detail' exp.id %}" style="font-size:18px; font-weight:bold; color:#8B6F47; text-decoration:none;">
+            <a href="{% url 'experiment_detail' exp.id %}" style="font-size:18px; font-weight:bold; color:#66bb6a; text-decoration:none;">
               {{ exp.title }}
             </a>
             <p style="margin:5px 0; color:#666; font-size:14px;">
@@ -29,7 +29,7 @@
   {% if user.is_authenticated %}
   <div style="margin: 20px 0;">
     <a href="{% url 'create_experiment' lab.id %}"
-       style="display:inline-block; padding:10px 20px; background-color:#8B6F47; color:white; text-decoration:none; border-radius:5px; font-weight:bold;">
+       style="display:inline-block; padding:10px 20px; background-color:#4caf50; color:white; text-decoration:none; border-radius:5px; font-weight:bold;">
       Add New Experiment
     </a>
   </div>
