@@ -1002,3 +1002,20 @@ main {
   position: relative;
   left: 130px;
 }
+
+.tagline{
+font-size:1.1rem;
+color:var(--text-light);
+font-weight:500;
+margin-top:-30px;
+margin-bottom:25px;
+padding-left:2px;
+letter-spacing:0.2px;
+opacity:0.9;
+}
+
+.container-home-page .title-container .tagline{
+  text-align:center;
+  margin-left:-60px;
+}
+
