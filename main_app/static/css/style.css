@@ -948,3 +948,8 @@ audio {
     grid-template-columns: 1fr;
   }
 }
+.back-btn {
+  border-radius: 6px !important; /* شكل مستطيل بزوايا خفيفة */
+  padding: 12px 25px;
+  font-size: 16px;
+}
