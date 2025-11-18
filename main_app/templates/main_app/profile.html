@@ -3,29 +3,30 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="profile-header">
-        {% if profile.avatar %}
-            <img src="{% static profile.avatar|cut:'main_app/static/' %}"
-                 class="avatar" style="width: 100px; height: 100px; border-radius: 50%;">
-        {% endif %}
 
-        <h2>{{ user.username }}</h2>
-        <p><strong>Bio:</strong> {{ profile.bio }}</p>
-        <a href="{% url 'edit-profile' %}" class="btn btn-primary">Edit Profile</a>
-    </div>
+    <div class="profile-layout">
 
-    <br>
-    <br>
+        <div class="profile-header">
+            {% if profile.avatar %}
+                <img src="{% static profile.avatar|cut:'main_app/static/' %}"
+                     class="avatar" style="width: 100px; height: 100px; border-radius: 50%;">
+            {% endif %}
 
-    <div class="experiments-section mt-4">
-        <h3>My Experiments:</h3>
+            <h2>{{ user.username }}</h2>
+            <p><strong>Bio:</strong> {{ profile.bio }}</p>
+            <a href="{% url 'edit-profile' %}" class="btn btn-primary">Edit Profile</a>
+        </div>
 
-        {% for experiment in user_experiments %}
-            <div class="experiment-item" style="margin-bottom:15px;">
-                <h4><a href="{% url 'experiment_detail' experiment.id %}">{{ experiment.title }}</a></h4>
-                <small>Created: {{ experiment.created_at|date:"M d, Y" }}</small>
-            </div>
-        {% endfor %}
+        <div class="experiments-section mt-4">
+            <h3>My Experiments:</h3>
+
+            {% for experiment in user_experiments %}
+                <div class="experiment-item" style="margin-bottom:15px;">
+                    <h4><a href="{% url 'experiment_detail' experiment.id %}">{{ experiment.title }}</a></h4>
+                    <small>Created: {{ experiment.created_at|date:"M d, Y" }}</small>
+                </div>
+            {% endfor %}
+        </div>
 
     </div>
 </div>
