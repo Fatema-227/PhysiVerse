@@ -1,37 +1,29 @@
 {% extends 'main_app/base.html' %}
 {% block content %}
-<div class="container mt-5">
-  <h2 class="mb-4">Sign Up</h2>
+    <h2>Sign Up</h2>
+<div class="signup-wrapper">
+  <form method="POST" enctype="multipart/form-data" class="signup-form">
 
-  <form method="POST" enctype="multipart/form-data" class="p-3 border rounded shadow-sm bg-light">
+
     {% csrf_token %}
 
-    <div class="mb-3">
-      <label for="id_username" class="form-label">Username:</label>
-      {{ form.username }}
-    </div>
+    <label>Username:</label>
+    {{ form.username }}
 
-    <div class="mb-3">
-      <label for="id_password1" class="form-label">Password:</label>
-      {{ form.password1 }}
-    </div>
+    <label>Password:</label>
+    {{ form.password1 }}
 
-    <div class="mb-3">
-      <label for="id_password2" class="form-label">Confirm Password:</label>
-      {{ form.password2 }}
-    </div>
+    <label>Confirm Password:</label>
+    {{ form.password2 }}
 
-    <div class="mb-3">
-      <label for="id_avatar" class="form-label">Profile Picture:</label>
-      {{ form.avatar }}
-    </div>
+    <label>Profile Picture:</label>
+    {{ form.avatar }}
 
-    <div class="mb-3">
-      <label for="id_bio" class="form-label">Bio:</label>
-      {{ form.bio }}
-    </div>
+    <label>Bio:</label>
+    {{ form.bio }}
 
-    <button type="submit" class="btn btn-success w-100">Register</button>
+    <button type="submit" class="btn w-100">Register</button>
   </form>
 </div>
+
 {% endblock %}

@@ -265,7 +265,6 @@
       mediaRecorder.start();
       isRecording = true;
 
-      // Timer setup
       seconds = 0;
       recordingStatus.textContent = `Recording: 0s`;
       recordingStatus.style.color = '#dc3545';
@@ -284,7 +283,6 @@
     }
   });
 
-  // ======== STOP RECORDING ========
   stopRecordButton.addEventListener('click', () => {
     if (mediaRecorder && isRecording) {
       clearInterval(recordingTimer);
@@ -301,8 +299,6 @@
     }
   });
 
-
-  // ======== EXISTING FUNCTIONS ========
 
   function editAudioNote(audioNoteId) {
     document.getElementById('audio-note-' + audioNoteId + '-text').style.display = 'none';

@@ -1,5 +1,12 @@
 {% extends 'main_app/base.html' %}
-
+{% load static %}
 {% block content %}
+<div class="container-home-page">
+<div class="title-container">
   <h1>Welcome to PhysiVerse </h1>
+</div>
+<div id="image-wrapper">
+<img src="{% static 'image/home.png' %}" id="specific-image-style">
+</div>
+</div>
 {% endblock %}

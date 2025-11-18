@@ -941,7 +941,7 @@ audio {
 
 .profile-header {
   position: sticky;
-  top: 100px;
+  top: 0px;
 }
 
 @media (max-width: 900px) {
@@ -965,4 +965,40 @@ audio {
   border: none;
   background: none;
   box-shadow: none;
+}
+/* إزالة المسافة من أعلى صفحة البروفايل */
+.profile-layout {
+  margin-top: 0 !important;
+}
+
+.profile-header {
+  margin-top: 0 !important;
+  padding-top: 20px !important;
+}
+
+main {
+  padding-top: 10px !important;
+}
+
+.container-home-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-container h1 {
+  text-align: left;
+  white-space: nowrap;
+  margin-left: -60px;
+}
+
+#image-wrapper {
+  text-align: right;
+}
+
+
+#specific-image-style{
+  width: 550px;
+  position: relative;
+  left: 130px;
 }
