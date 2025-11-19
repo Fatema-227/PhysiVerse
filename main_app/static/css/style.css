@@ -440,11 +440,10 @@ button[onclick*="show"]:hover {
   box-shadow: 0 5px 20px var(--shadow-soft);
 }
 
-/* Profile - Enhanced Design */
 .profile-header {
   display: flex;
-  flex-direction: column; /* يخلي الصورة فوق والاسم تحت */
-  align-items: center; /* يوسّط كل شيء */
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile-header {
@@ -1057,7 +1056,7 @@ main {
 /* here */
 
 .signup-wrapper {
-  height: 100vh;
+  height: 65vh;
   display: flex;
   justify-content: center;
   align-items: center;
