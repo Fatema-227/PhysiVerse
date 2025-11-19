@@ -7,7 +7,7 @@
 
 {% block content %}
 <div style="max-width:800px; margin:0 auto; padding:20px;">
-  <h1 style="color:#8B6F47; margin-bottom:10px;">
+  <h1 style=" margin-bottom:10px;">
     {% if action == 'Create' %}
       Create New Experiment
     {% else %}
@@ -42,7 +42,7 @@
       <label for="id_Simulation_Data" style="display:block; font-weight:bold; margin-bottom:5px; color:#333;">
         Simulation Data:<span style="color:red;">*</span>
       </label>
-      <small style="color:#666; display:block; margin-bottom:5px;">Enter HTML code for interactive simulation</small>
+      <small style="color:#666; display:block; margin-bottom:5px;"> Enter iframe link code for interactive simulation (you can get the iframe from the PhET website)</small>
       {{ form.Simulation_Data }}
     </div>
 
@@ -70,7 +70,7 @@
     </div>
 
     <div style="display:flex; gap:10px; justify-content:flex-start; border-top:1px solid #ddd; padding-top:20px;">
-      <button type="submit" style="padding:12px 30px; background-color:#8B6F47; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px; font-weight:bold;">
+      <button type="submit" style="padding:12px 30px; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px; font-weight:bold;">
         {% if action == 'Create' %}
           Create Experiment
         {% else %}
