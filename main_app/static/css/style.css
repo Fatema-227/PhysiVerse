@@ -328,7 +328,6 @@ label {
   font-size: 17px;
 }
 
-/* Simulation Container */
 .simulation-container {
   background: var(--cream);
   border-radius: 25px;
@@ -352,7 +351,6 @@ label {
   border: 1px solid var(--border-light);
 }
 
-/* Comments Section & Discussion */
 .experiment-detail ul {
   list-style: none;
   padding: 0;
@@ -585,7 +583,6 @@ button[onclick*="show"]:hover {
   margin-top: 8px;
 }
 
-/* Popup/Modal */
 .popup-overlay {
   display: none;
   position: fixed;
@@ -761,7 +758,6 @@ button[onclick*="show"]:hover {
   background: var(--dark-sage);
 }
 
-/* Messages */
 .messages {
   position: fixed;
   top: 90px;
@@ -805,7 +801,6 @@ video {
   border: 1px solid var(--border-light);
 }
 
-/* Audio Notes */
 .audio-notes-section {
   background: var(--cream);
   border-radius: 25px;
@@ -859,7 +854,6 @@ audio {
   }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .nav-content {
     flex-direction: column;
