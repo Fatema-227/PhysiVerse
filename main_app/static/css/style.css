@@ -1,21 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap");
 
 * {
-  font-family: "Delius", cursive !important;
+  font-family: "Momo Trust Display", cursive !important;
 }
 
 :root {
-  --primary-sage: #4caf50;
-  --dark-sage: #388e3c;
-  --cream: #f1f8f4;
+  --primary-blue: #7baee0;
+  --dark-blue: #4a89c6;
+  --cream: #f4f9ff;
   --off-white: #ffffff;
-  --light-beige: #e8f5e9;
-  --text-dark: #2e3830;
-  --text-light: #5d6d5f;
-  --accent-olive: #66bb6a;
-  --border-light: #c8e6c9;
-  --shadow-soft: rgba(76, 175, 80, 0.15);
-  --shadow-medium: rgba(56, 142, 60, 0.28);
+  --light-blue: #ddebfa;
+  --text-dark: #2c3a47;
+  --text-light: #6c7a89;
+  --accent-soft: #a6c8f0;
+  --border-light: #c9dbf4;
+  --shadow-soft: rgba(123, 174, 224, 0.15);
+  --shadow-medium: rgba(74, 137, 198, 0.28);
 }
 
 * {
@@ -25,7 +25,7 @@
 }
 
 body {
-  font-family: "Delius", cursive;
+  font-family: "Momo Trust Display", cursive;
   background: linear-gradient(135deg, var(--cream) 0%, var(--light-beige) 100%);
   color: var(--text-dark);
   min-height: 100vh;
@@ -1035,7 +1035,6 @@ main {
   border-radius: 8px;
   text-decoration: none;
   font-size: 20px;
-  font-weight: bold;
   margin-top: 20px;
   cursor: pointer;
   border: none;
@@ -1108,8 +1107,7 @@ textarea {
 #id_username,
 #id_password2,
 #id_avatar,
-#id_bio
-{
+#id_bio {
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 5px;
@@ -1130,3 +1128,140 @@ textarea {
   background: #4caf50;
 }
 
+
+body {
+  background: linear-gradient(135deg, var(--cream), var(--light-blue));
+  color: var(--text-dark);
+}
+
+.brand-logo {
+  color: var(--dark-blue);
+}
+
+.brand-logo:hover {
+  color: var(--primary-blue);
+}
+
+nav ul li a:hover,
+nav ul li a.logout-btn:hover {
+  background: var(--light-blue);
+  color: var(--dark-blue);
+}
+
+h1 {
+  color: var(--dark-blue);
+}
+
+h2::after {
+  background: var(--primary-blue);
+}
+
+.lab-card::before {
+  background: linear-gradient(90deg, var(--primary-blue), var(--accent-soft));
+}
+
+.lab-card h3 {
+  color: var(--dark-blue);
+}
+
+.lab-card a,
+button,
+.btn,
+input[type="submit"],
+.profile-header .btn {
+  background: var(--primary-blue);
+  color: var(--off-white);
+}
+
+.lab-card a:hover,
+button:hover,
+.btn:hover,
+input[type="submit"]:hover,
+.profile-header .btn:hover {
+  background: var(--dark-blue);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(76, 142, 240, 0.15);
+}
+
+.avatar {
+  border-color: var(--primary-blue);
+}
+
+.profile-header h2 {
+  color: var(--dark-blue);
+}
+
+.experiment-item:hover {
+  border-color: var(--primary-blue);
+}
+
+.experiment-item a:hover {
+  color: var(--primary-blue);
+}
+
+.popup-close {
+  background: var(--primary-blue);
+}
+
+.popup-close:hover {
+  background: var(--dark-blue);
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+  background: var(--primary-blue);
+}
+
+.popup-content::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-blue);
+}
+
+.messages li {
+  border-left-color: var(--primary-blue);
+}
+
+.video,
+.audio-notes-section {
+  border: 1px solid var(--border-light);
+}
+
+button[style*="background-color:#4caf50"],
+.join-btn {
+  background-color: var(--primary-blue);
+}
+
+button:hover,
+.join-btn:hover {
+  background-color: var(--dark-blue);
+}
+
+.popup-content button[onclick*="close"] {
+  background-color: var(--primary-blue) !important;
+}
+
+.popup-content button[onclick*="close"]:hover {
+  background-color: var(--dark-blue) !important;
+}
+
+.messages li.success {
+  border-left: 4px solid var(--primary-blue);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow: 0 0 0 3px rgba(123, 174, 224, 0.15);
+}

@@ -14,12 +14,12 @@
   {% if user == experiment.user %}
   <div style="display: flex; gap: 10px;">
     <a href="{% url 'edit_experiment' experiment.id %}"
-       style="padding:6px 14px; background-color:#4caf50; color:white; border:none; border-radius:4px; cursor:pointer; font-size:14px;">
+       style="padding:6px 14px; background-color:#7BAEE0; color:white; border:none; border-radius:4px; cursor:pointer; font-size:14px;">
       Edit
     </a>
 
     <button onclick="showDeleteExperimentModal()"
-            style="padding:6px 14px; color:white; border:none; border-radius:4px; cursor:pointer; font-size:14px;">
+            style="padding:6px 14px; background-color:#7BAEE0;color:white; border:none; border-radius:4px; cursor:pointer; font-size:14px;">
       Delete
     </button>
   </div>
@@ -169,7 +169,8 @@
   {% endif %}
 </div>
 
-<a href="{% url 'experiment_discussion' experiment.id %}" style="display:inline-block; padding:10px 20px; background-color:#4caf50; color:white; text-decoration:none; border-radius:5px; margin-top:20px;">Joining the discussion</a>
+<a href="{% url 'experiment_discussion' experiment.id %}" style="display:inline-block; padding:10px 20px; background-color:#7BAEE0; color:white; text-decoration:none; border-radius:5px; margin-top:20px;">Joining the discussion</a>
+
 
 <div id="procedurePopup" class="popup-overlay" onclick="closePopup(event)">
   <div class="popup-content" onclick="event.stopPropagation()">

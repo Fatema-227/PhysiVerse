@@ -70,7 +70,7 @@
     </div>
 
     <div style="display:flex; gap:10px; justify-content:flex-start; border-top:1px solid #ddd; padding-top:20px;">
-      <button type="submit" style="padding:12px 30px; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px; font-weight:bold;">
+      <button type="submit" style="padding:12px 30px; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px; ">
         {% if action == 'Create' %}
           Create Experiment
         {% else %}
@@ -79,7 +79,7 @@
       </button>
 
       <a href="{% if lab %}{% url 'lab_detail' lab.id %}{% else %}{% url 'experiment_detail' experiment.id %}{% endif %}"
-         style="display:inline-block; padding:12px 30px; background-color:#6c757d; color:white; text-decoration:none; border-radius:5px; font-size:16px; font-weight:bold;">
+         style="display:inline-block; padding:12px 30px; background-color:#6c757d; color:white; text-decoration:none; border-radius:5px; font-size:16px;">
         Cancel
       </a>
     </div>
