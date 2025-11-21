@@ -407,8 +407,7 @@ button[style*="background-color:#4caf50"],
 button[onclick*="edit"],
 button[onclick*="Delete"],
 button[onclick*="show"] {
-  background: var(--primary-sage) !important;
-  color: var(--off-white) !important;
+
   border: none;
   border-radius: 25px;
   padding: 10px 20px;

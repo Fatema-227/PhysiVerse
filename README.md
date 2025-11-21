@@ -63,6 +63,14 @@ Database(SQL):
 
 ---
 
+### Screenshots:
+![](./assets/Home%20Page%20(1).png)
+![](./assets/Profile%20page.png)
+![](./assets/Labs%20list.png)
+![](./assets/Lab%20detail.png)
+
+---
+
 ### User Stories :
 
 - As a user, I want to view all labs in the system.
